@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& ni) {
+        vector<vector<int>> ans;
+
+        for(auto &inter : intervals) {
+            if(ni[0] > inter[1]) 
+            ans.push_back(inter);
+            else if(ni[1] < inter[0]){
+                ans.push_back(ni);
+                ni = inter;
+            } else {
+                ni[0]=min(inter[0], ni[0]);
+                ni[1]=max(inter[1],ni[1]);
+            }
+        }
+        ans.push_back(ni);
+        return ans;
+    }
+};
