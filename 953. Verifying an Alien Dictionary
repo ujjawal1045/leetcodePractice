@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        vector<int>v(26,0);
+        bool check = false;
+
+        for(int i = 0; i<26;i++)
+        v[order[i]-'a']=i;
+        for(int i = 0; i+1 < words.size();i++) {
+            string s1 = words[i];
+            string s2 = words[i+1];
+            int n1 = s1.length(), n2 = s2.length();
+            int size = min(n1,n2);
+            for(int j = 0; j < size;j++) {
+                if(v[s1[j]-'a'] > v[s2[j]-'a'])
+                return false;
+                if(v[s1[j]-'a'] < v[s2[j]-'a']) {
+                    check = true;
+                    break;
+                }
+                
+
+            }
+            if(!check && n1 > n2)
+            return false;
+        }
+        return true;
+    }
+};
