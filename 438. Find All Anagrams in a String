@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        
+    vector<int> si1(26, 0);
+    vector<int> si2(26, 0);
+    int n1 = s.length();
+    int n2 = p.length();
+    vector<int> ans;
+    if(n2 > n1)
+    return ans;
+    int left = 0, right = 0;
+        while(right < n2) {
+        si1[s[right]-'a'] += 1;
+        si2[p[right]-'a'] += 1;
+        right++;
+    }
+    right--;
+
+     while(right < n1) {
+         cout<<"hello"<<endl;
+         if(si1 == si2)
+         ans.push_back(left);
+         right++;
+        //  cout<<"stringindex1:";
+        //  for(int i = 0; i< si1.size();i++)
+        //  cout<<si1[i];
+        //  cout<<endl;
+        //  cout<<"stringindex2:";
+        //  for(int i = 0; i< si2.size();i++)
+        //  cout<<si2[i];
+         if(right != n1)
+         si1[s[right] - 'a'] += 1;
+         si1[s[left] - 'a'] -=1;
+         left++;
+
+     }
+    
+     return ans;
+    }
+};
