@@ -1,0 +1,65 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        // map<int, int> ourmap;
+
+        // for(int i = 0; i< fruits.size();i++) {
+        //     if(ourmap.find(fruits[i]) != ourmap.end()) {
+        //         ourmap[fruits[i]]++;
+        //     } else {
+        //         ourmap[fruits[i]]=1;
+        //     }
+        // }
+
+        // for (auto i = ourmap.begin(); i != ourmap.end(); i++) {
+        //     std::cout << i->first 
+        //           << " : " 
+        //           << i->second << '\n';
+        // }
+        // int ans = 0;
+        //  int count = 0;
+        //  for(auto it = ourmap.rbegin(); it != ourmap.rend();it++){
+            
+        //      if(count<2){
+        //          ans += it -> second;
+        //          count++;
+        //      }
+        //  }
+        // return ans;
+        // map<int, int> ourmap;
+        // int maxi = 0;
+        // for(int i = 0; i<fruits.size();i++) {
+        //     if(ourmap.size() < 2){
+        //         ourmap[fruits[i]]++;
+        //     } else if(ourmap.size() >= 2 && ourmap.find(fruits[i]) != ourmap.end()) {
+        //         ourmap[fruits[i]]++;
+        //     } else {
+        //         for(auto it = ourmap.begin(); it != ourmap.end();it++){
+        //             if(it->first != fruits[i-1]) {
+        //                 ourmap.erase(it);
+        //             }
+        //         }
+        //         ourmap[fruits[i]]++;
+        //     }
+        //     int total_sum = std::accumulate(ourmap.begin(), ourmap.end(), 0,
+        //                 [](auto prev_sum, auto &entry) {
+        //                     return prev_sum + entry.second;
+        //                 });
+        //     maxi = max(maxi, total_sum);
+        // }
+        // return maxi;
+        unordered_map<int, int> ourmap;
+        int i,j;
+        for( i = 0, j = 0; j < fruits.size();j++) {
+            ourmap[fruits[j]]++;
+            if(ourmap.size() > 2){
+                if(--ourmap[fruits[i]]==0)
+                ourmap.erase(fruits[i]);
+                i++;
+                
+            }
+        }
+        cout<<i<<j;
+        return j -i;
+    }
+};
