@@ -1,0 +1,29 @@
+class Solution {
+public:
+    long long distinctNames(vector<string>& ideas) {
+        unordered_set<string> st(ideas.begin(), ideas.end());
+        unordered_map<char,unordered_map<char, int>> ourmap;
+        for(auto& str: st){
+            string s = str;
+            char prev=s[0];
+            for(char c = 'a'; c<='z';c++){
+                s[0]=c;
+                if(st.find(s) == st.end())
+                ourmap[c][prev]++;
+            }
+        }
+
+        long long count = 0;
+
+        for(auto& str: st){
+            string s = str;
+            char prev = s[0];
+            for(char c = 'a'; c<= 'z'; c++){
+                s[0]=c;
+                if(st.find(s) == st.end())
+                count += ourmap[prev][c];
+            }
+        }
+        return count;
+    }
+};
