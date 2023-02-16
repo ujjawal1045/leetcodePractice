@@ -1,0 +1,54 @@
+class Solution {
+public:
+void helper(vector<bool> & visited,int root,vector<int>&leftchild,vector<int>&rightchild) {
+    if(visited[root]==true)
+        return;
+    visited[root]=true;
+    if(leftchild[root] != -1)
+     helper(visited, leftchild[root], leftchild, rightchild);
+
+     if(rightchild[root] != -1)
+        helper(visited, rightchild[root], leftchild, rightchild);
+
+}
+    bool validateBinaryTreeNodes(int n, vector<int>& leftchild, vector<int>& rightchild) {
+        vector<bool> visited(n , false);
+        vector<int> indegree(n,0);
+
+        for(int i = 0; i< leftchild.size(); i++) {
+            if(leftchild[i] !=-1)
+            indegree[leftchild[i]]++;
+        }
+        for(int j = 0; j < rightchild.size();j++) {
+            if(rightchild[j] != -1)
+            indegree[rightchild[j]]++;
+        }
+
+        for(int i = 0; i< indegree.size(); i++) {
+            if(indegree[i] >=2)
+                return false;
+        }
+
+        int checkroot = 0;
+        int rootnode = -1;
+
+        for(int k = 0; k < indegree.size(); k++) {
+            if(indegree[k]==0){
+            checkroot++;
+            rootnode = k;
+            }
+        }
+
+        if(checkroot != 1)
+        return false;
+
+        helper(visited, rootnode, leftchild, rightchild);
+
+        for(int i = 0; i< visited.size() ; i++) {
+            if(visited[i]==false)
+            return false;
+        }
+
+        return true;
+    }
+};
