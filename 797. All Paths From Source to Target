@@ -1,0 +1,25 @@
+class Solution {
+public:
+
+void helper(int node,vector<vector<int>>& graph, vector<int>& tempans , vector<vector<int>>& ans, int dest) {
+    tempans.push_back(node);
+    for(auto it : graph[node]) {
+        if(it == dest){
+            tempans.push_back(it);
+            ans.push_back(tempans);
+            tempans.pop_back();
+            continue;
+        }
+
+        helper(it, graph, tempans,ans,dest);
+        tempans.pop_back();
+    }
+}
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        int n = graph.size() - 1;
+        vector<int> tempans;
+        vector<vector<int>> ans;
+        helper(0,graph, tempans, ans, n);
+        return ans;
+    }
+};
