@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int minimumDeviation(vector<int>& nums) {
+        priority_queue<int> pq;
+        int mini = INT_MAX;
+
+        for(auto num : nums) {
+            if(num % 2 == 0) {
+                pq.push(num);
+                mini = min(mini, num);
+            } else {
+                pq.push(num * 2);
+                mini = min(num*2, mini);
+            }
+        }
+
+        int ans = INT_MAX;
+
+        while(pq.top() % 2 ==0) {
+            int max = pq.top();
+            pq.pop();
+            ans = min(ans,max-mini);
+            int newNum = max / 2;
+            pq.push(newNum);
+            mini = min(mini,newNum);
+        }
+
+        ans = min(ans,pq.top()-mini);
+
+        return ans;
+    }
+};
